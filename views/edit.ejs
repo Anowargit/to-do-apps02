@@ -1,0 +1,11 @@
+<%- include("h-f/header") %>
+
+<div class="container">
+    <h2>Edit Task</h2>
+    <form action="/edit/<%= todo.id %>?_method=PUT" method="POST" class="todo-form">
+        <input type="text" name="task" value="<%= todo.task %>" required>
+        <button type="submit">Update</button>
+    </form>
+</div>
+
+<%- include("h-f/footer") %>

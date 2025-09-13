@@ -1,0 +1,30 @@
+<%- include("h-f/header") %>
+
+<div class="container">
+    <form action="/add" method="POST" class="todo-form">
+        <input type="text" name="task" placeholder="Enter a new task">
+        <button type="submit">Add</button>
+    </form>
+
+    <ul class="todo-list">
+        <% todos.forEach(todo => { %>
+            <li>
+                <!-- Checkbox only for created tasks -->
+                <form action="/toggle/<%= todo.id %>?_method=PUT" method="POST" style="display:inline;">
+                    <input type="checkbox" onclick="this.form.submit()" <%= todo.completed ? 'checked' : '' %>>
+                </form>
+                <span class="<%= todo.completed ? 'completed' : '' %>">
+                    <%= todo.task %>
+                </span>
+                <div class="actions">
+                    <a href="/edit/<%= todo.id %>">Edit</a>
+                    <form action="/delete/<%= todo.id %>?_method=DELETE" method="POST" style="display:inline;">
+                        <button type="submit">Delete</button>
+                    </form>
+                </div>
+            </li>
+        <% }) %>
+    </ul>
+</div>
+
+<%- include("h-f/footer") %>
